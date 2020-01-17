@@ -70,7 +70,7 @@ export class SignupComponent implements OnInit {
 
           Swal.fire({
             position: 'top-end',
-            icon: 'error',
+            icon: 'success',
             width: 400,
             title: 'You have been registerd to the Cognizant Outreach Successfully. Please login.',
             showConfirmButton: false,
