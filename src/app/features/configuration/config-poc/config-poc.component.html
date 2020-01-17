@@ -1,0 +1,91 @@
+<div class="panel panel-default panel-width">
+    <!-- Default panel contents -->
+    <div class="navbar navbar-expand-lg panel-header-color"><span class="nav-bar-title-color">ASSIGN {{role}}</span>
+        <div style="margin-left: 84%;">
+            <button type="button" class="btn btn-primary btn-sm minus-panel-btn-style"><i class="fa fa-minus"
+                    aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary btn-sm cross-panel-btn-style"><i class="fa fa-times"
+                    aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary btn-sm replay-panel-btn-style"><i class="fa fa-reply"
+                    aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <div class="panel-body row margin-row">
+        <div class="col-md-1">
+            <span style="font-weight: bolder;color: #007acc;">Employee ID</span>
+        </div>
+        <div class="col-md-8">
+            <form [formGroup]="configRoleForm">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" formControlName="eventId" style="background-color: #e1e1ea;"
+                        placeholder="Enter Event ID" aria-label="eventId" aria-describedby="basic-addon1">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" formControlName="email" style="background-color: #e1e1ea;"
+                        placeholder="Enter Email Address" aria-label="emailAddress" aria-describedby="basic-addon1">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-success" (click)="addRole()">Add {{role}}</button>
+            <button type="button" class="margin btn btn-danger margin-left-btn" (click)="deleteRole()">Remove
+                {{role}}</button>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="panel panel-default panel-width">
+    <!-- Default panel contents -->
+    <div class="navbar navbar-expand-lg panel-header-color"><span class="nav-bar-title-color">{{role}} USERS
+        </span>
+        <div style="margin-left: 84%;">
+            <button type="button" class="btn btn-primary btn-sm minus-panel-btn-style"><i class="fa fa-minus"
+                    aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary btn-sm cross-panel-btn-style"><i class="fa fa-times"
+                    aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary btn-sm replay-panel-btn-style"><i class="fa fa-reply"
+                    aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <form [formGroup]="searchRoleForm">
+            <div style="float: left;">
+                <input type="text" class="form-control" formControlName="eventIdSearch"
+                    style="background-color: #e1e1ea;" placeholder="Enter Event ID" aria-label="eventId"
+                    aria-describedby="basic-addon1">
+                <button type="button" class="btn btn-primary btn-sm clear-filter-btn-style"
+                    (click)="findEmployeesByRoleAndEvent()"><i class="fas fa-search"></i>
+                    SEARCH {{role}} by Event ID</button>
+            </div>
+        </form>
+        <div style="float: right;" class="row">
+            <button type="button" class="btn btn-primary btn-sm clear-filter-btn-style"><i class="fa fa-times"
+                    aria-hidden="true" (click)="onClearFilters($event)"></i>CLEAR FILTERS</button>
+            <button type="button" class="btn btn-primary btn-sm dw-excel-btn-style" #downloadExcel
+                (click)="exportToExcel()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> DOWNLOAD
+                EXCEL</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th *ngFor="let col of columns">
+                        {{col}}
+                    </th>
+                </tr>
+                <tr *ngFor="let data of roleDetails| paginate: config">
+                    <td *ngFor="let col of columnMap" class="overflow-wrap-hack">
+                        {{data[col]}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <nav aria-label="Page navigation example" style="float: right;">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </nav>
+    </div>
+</div>

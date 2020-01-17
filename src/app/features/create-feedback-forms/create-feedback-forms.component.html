@@ -1,0 +1,105 @@
+<form [formGroup]="addForm">
+  <div class="col-md-2">
+    <br>
+    <div class="card pmd-card border-none body-width">
+      <div class="card-body bg-color-blue">
+        <h4 class="card-title font-color font-size-head">Add Question</h4>
+      </div>
+    </div>
+
+    <div class="form-group form-width">
+      <table class="table table-hover body-width">
+        <tbody>
+          <tr class="bg-color-none">
+            <td class="rowWidth">
+              <h5>Answer Type</h5>
+              <div class="checkbox">
+                <label><input type="checkbox" formControlName="allowMultipleQuestion" (click)="onCheck($event)" value="Allow Multiple
+                  Answers">Allow Multiple
+                  Answers</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" formControlName="freeTextAnswer" (click)="onCheck($event)"
+                    value="Free Text Answers">Free Text
+                  Answers</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" formControlName="customQuestion" (click)="onCheck($event)"
+                    value="Multiple Choice One answer">Multiple Choice One answer</label>
+              </div>
+            </td>
+            <td class="rowBorder">
+              <h5>Feedback Type</h5>
+              <label class="radio-inline participatedStyle"><input type="radio" name="participatedOpt"
+                  formControlName="participatedOpt" (change)="onOptionChange($event)" value="Participated"
+                  [checked]="feedbackType === 'Participated' ? true : false">Participated</label>
+              <label class="radio-inline participatedStyle"><input type="radio" name="notparticipatedOpt"
+                  formControlName="notparticipatedOpt" (change)="onOptionChange($event)" value="Not Participated"
+                  [checked]="feedbackType === 'Not Participated' ? true : false">Not
+                Participated</label>
+              <label class="radio-inline participatedStyle"><input type="radio" name="unregisteredOpt"
+                  formControlName="unregisteredOpt" (change)="onOptionChange($event)" value="Unregistered"
+                  [checked]="feedbackType === 'Unregistered' ? true : false">Unregistered</label>
+            </td>
+          </tr>
+          <tr class="bg-color-none event-cntrl-width">
+            <td class="rowWidth">
+              <h5>Event ID</h5>
+            </td>
+            <td class="rowBorder">
+              <input type="text" class="form-control" formControlName="eventId" id="eventId" [(ngModel)]="eventId">
+            </td>
+          </tr>
+          <tr class="bg-color-none inp-cntrl-width">
+            <td class="rowWidth">
+              <h5>Questions</h5>
+            </td>
+            <td class="rowBorder">
+              <input type="text" class="form-control" formControlName="question" id="question" [(ngModel)]="question">
+            </td>
+          </tr>
+          <tr *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
+            <td class="rowWidth">
+              <h5>Answer {{index+1}}</h5>
+            </td>
+            <td>
+              <input type="text" class="form-control" [formControl]="row.get('answer')">
+            </td>
+            <td>
+              <button type="button" class="btn btn-default border-none width45 button-color-orange button-height"
+                (click)="onRemoveRow(index)">
+                <h6 class="font-color">DELETE ANSWER</h6>
+              </button>
+            </td>
+          </tr>
+
+          <tr class="bg-color-none">
+            <td class="rowBorder">
+              <button type="button" class="btn btn-default border-none width45 button-color-green button-height"
+                (click)="onAddRow()">
+                <h6 class="font-color">ADD ANSWER</h6>
+              </button>
+            </td>
+            <td class="rowBorder">
+              <button type="button" class="btn btn-default border-none width15 button-color-blue button-height-page"
+                (click)="createFeedbackForm()">
+                <h6 class="font-color">SAVE</h6>
+              </button>
+              <button type="button"
+                class="btn btn-default border-none width15 button-color-grey margin-left-button button-height-page">
+                <h6 class="font-color" (click)="onCancel()">CANCEL</h6>
+              </button>
+              <button type="button"
+                class="btn btn-default border-none width15 button-color-red margin-left-button button-height-page">
+                <h6 class="font-color" (click)="deleteQuestion()">DELETE</h6>
+              </button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</form>

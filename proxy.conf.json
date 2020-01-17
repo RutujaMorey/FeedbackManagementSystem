@@ -1,0 +1,16 @@
+{
+  "/api/feedbackmanagement/**": {
+    "target": "http://localhost:8081/feedback-management",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/feedbackmanagement": ""
+    }
+  },
+  "/api/sendmail/**": {
+    "target": "http://localhost:8082/feedback-mail",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/sendmail": ""
+    }
+  }
+}
